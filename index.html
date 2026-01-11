@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tapped Out | Field Bars</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Montserrat:wght@300;400;600&family=Stardos+Stencil:wght@400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --army-green: #2d3e2e;
+            --heritage-cream: #f4eee0;
+            --brass: #b8860b;
+        }
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--heritage-cream);
+            color: var(--army-green);
+            overflow-x: hidden;
+        }
+        h1, h2, h3, .british-font {
+            font-family: 'Playfair Display', serif;
+        }
+        .stencil {
+            font-family: 'Stardos Stencil', cursive;
+        }
+        .bg-army-green { background-color: var(--army-green); }
+        .text-army-green { color: var(--army-green); }
+        .text-yellow-500 { color: var(--brass); }
+        
+        .hero-gradient {
+            background: linear-gradient(rgba(45, 62, 46, 0.7), rgba(45, 62, 46, 0.7)), 
+                        url('https://images.unsplash.com/photo-1533560224143-421731b57e79?q=80&w=2070&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .btn-mobilise {
+            background-color: var(--army-green);
+            color: white;
+            padding: 1rem 2rem;
+            border: 2px solid transparent;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            display: inline-block;
+        }
+        .btn-mobilise:hover {
+            background-color: white;
+            color: var(--army-green);
+            border-color: var(--army-green);
+        }
+
+        .nav-link {
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+        .nav-link:hover {
+            color: var(--brass);
+        }
+
+        .page-content {
+            display: none;
+            min-height: 70vh;
+        }
+        .page-content.active {
+            display: block;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Navigation -->
+    <nav class="p-6 flex justify-between items-center bg-army-green text-white shadow-lg sticky top-0 z-50">
+        <div class="flex items-center space-x-6 nav-link" onclick="navigateTo('home')">
+            <!-- RUGGED DEFENDER SKETCH LOGO -->
+            <div class="defender-logo">
+                <svg width="100" height="55" viewBox="0 0 120 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M41 11 L89 10.5 M46 6.5 L45 11 M84 5.5 L86 10.5 M56 7 L54 11 M74 6 L76 11" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+                    <path d="M12.5 44.5 L104 45.5 L106 31.5 L101 29.5 L87.5 14.5 L41.5 15.5 L36 30.5 L11.5 32.5 L12.5 44.5 Z" stroke="white" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/>
+                    <path d="M106 31.5 C 113.5 31.5 114 38.5 113 39 C 112 45 106 45 104 45.5" stroke="white" stroke-width="2" stroke-linecap="round"/>
+                    <circle cx="28.5" cy="45.5" r="8.5" stroke="white" stroke-width="2" fill="#2d3e2e"/>
+                    <circle cx="89" cy="45.5" r="8.5" stroke="white" stroke-width="2" fill="#2d3e2e"/>
+                    <path d="M46 18.5 L64 17.5 L64.5 27.5 L43 28.5" stroke="white" stroke-width="1.2" opacity="0.6"/>
+                    <path d="M71 18 L91 17 L94 27 L71.5 27.5" stroke="white" stroke-width="1.2" opacity="0.6"/>
+                    <path d="M68 18 L66 45" stroke="white" stroke-width="1" opacity="0.3"/>
+                </svg>
+            </div>
+            <div class="leading-none border-l border-white/20 pl-4">
+                <div class="text-2xl font-bold british-font tracking-[0.3em]">TAPPED OUT</div>
+                <div class="text-[10px] uppercase tracking-[0.35em] text-yellow-500 font-semibold mt-1">Field Bars</div>
+            </div>
+        </div>
+        <div class="hidden md:flex space-x-8 uppercase text-[10px] font-bold tracking-widest items-center">
+            <span class="nav-link" onclick="navigateTo('fleet')">The Fleet</span>
+            <span class="nav-link" onclick="navigateTo('story')">Our Story</span>
+            <span class="nav-link" onclick="navigateTo('packages')">Packages</span>
+            <span class="bg-white text-army-green px-5 py-2 hover:bg-yellow-500 transition-colors cursor-pointer" onclick="navigateTo('mobilise')">Mobilise</span>
+        </div>
+    </nav>
+
+    <!-- Page: HOME -->
+    <div id="home" class="page-content active">
+        <!-- Hero Section -->
+        <section class="h-[80vh] flex items-center justify-center text-center hero-gradient text-white px-4">
+            <div class="max-w-3xl">
+                <h1 class="text-5xl md:text-7xl mb-4 font-bold">Heritage on Tap.</h1>
+                <p class="text-xl md:text-2xl font-light mb-8 italic opacity-90">Authentic Land Rover bars for the quintessential British event.</p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <button onclick="navigateTo('mobilise')" class="border-2 border-white px-8 py-3 uppercase tracking-widest hover:bg-white hover:text-army-green transition-all font-bold text-sm">Request Mobilisation</button>
+                    <button onclick="navigateTo('fleet')" class="bg-brass px-8 py-3 uppercase tracking-widest text-white hover:bg-white hover:text-army-green transition-all font-bold text-sm">View the Fleet</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Summary Section -->
+        <section class="py-24 px-6 bg-white border-b border-gray-100">
+            <div class="max-w-3xl mx-auto text-center">
+                <span class="text-brass uppercase tracking-[0.4em] text-[10px] font-bold mb-4 block">The Mission Brief</span>
+                <h2 class="text-4xl mb-8 font-bold british-font text-army-green">Re-purposed British Icons.</h2>
+                <div class="w-16 h-1 bg-army-green mx-auto mb-10"></div>
+                <div class="text-xl text-gray-700 leading-relaxed font-light italic">
+                    <p>
+                        We convert vintage Land Rover Defenders and Series units into premium mobile field bars. 
+                        Dressed in traditional Deep Bronze Green with custom brass hardware, our fleet brings rugged British heritage to private events, weddings, and celebrations nationwide.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Highlights -->
+        <section class="py-20 px-6 max-w-7xl mx-auto text-center">
+            <h2 class="text-3xl mb-4 font-bold uppercase">The Fleet Command</h2>
+            <p class="text-gray-600 mb-12">Precision-engineered icons, repurposed for high-end hospitality.</p>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-white p-6 shadow-lg border border-gray-100 group hover:border-brass transition-all cursor-pointer" onclick="navigateTo('fleet')">
+                    <h3 class="text-xl font-bold mb-2 british-font">The Brigadier</h3>
+                    <p class="text-sm opacity-70 mb-4">The 1954 Pioneer. Compact and iconic.</p>
+                    <span class="text-xs uppercase font-bold tracking-widest text-brass">View Unit Details</span>
+                </div>
+                <div class="bg-white p-6 shadow-lg border border-gray-100 group hover:border-brass transition-all cursor-pointer" onclick="navigateTo('fleet')">
+                    <h3 class="text-xl font-bold mb-2 british-font">The Colonel</h3>
+                    <p class="text-sm opacity-70 mb-4">The Heavy Duty Workhorse. Defender 110.</p>
+                    <span class="text-xs uppercase font-bold tracking-widest text-brass">View Unit Details</span>
+                </div>
+                <div class="bg-white p-6 shadow-lg border border-gray-100 group hover:border-brass transition-all cursor-pointer" onclick="navigateTo('fleet')">
+                    <h3 class="text-xl font-bold mb-2 british-font">The Major</h3>
+                    <p class="text-sm opacity-70 mb-4">The Summer Specialist. Series III.</p>
+                    <span class="text-xs uppercase font-bold tracking-widest text-brass">View Unit Details</span>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Page: THE FLEET -->
+    <div id="fleet" class="page-content py-24 px-6 max-w-7xl mx-auto">
+        <div class="text-center mb-16">
+            <h2 class="text-5xl mb-4 font-bold uppercase tracking-tight">The Tactical Fleet</h2>
+            <div class="w-24 h-1 bg-army-green mx-auto"></div>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-10">
+            <!-- Brigadier -->
+            <div class="bg-white shadow-xl overflow-hidden border border-gray-100">
+                <img src="https://images.unsplash.com/photo-1647425195029-798782a93325?q=80&w=1974&auto=format&fit=crop" class="h-64 w-full object-cover" alt="Series 1">
+                <div class="p-8">
+                    <h3 class="text-2xl mb-2 font-bold british-font">The Brigadier</h3>
+                    <p class="text-xs uppercase tracking-widest text-gray-400 mb-4">Unit 01: 1954 Series I</p>
+                    <p class="text-sm text-gray-600 mb-6 font-light leading-relaxed">Restored from a 1954 chassis, it fits through garden gates that stop others. Features a hidden 2-tap draught system and mahogany service deck.</p>
+                    <div class="flex justify-between items-center text-army-green font-bold border-t pt-6">
+                        <span class="stencil text-xl">£450+</span>
+                        <button onclick="navigateTo('mobilise')" class="text-[10px] uppercase font-bold bg-army-green text-white px-3 py-2">Book Unit</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Colonel -->
+            <div class="bg-white shadow-xl overflow-hidden border border-gray-100">
+                <img src="https://images.unsplash.com/photo-1547402633-40e10f3f2d2b?q=80&w=2070&auto=format&fit=crop" class="h-64 w-full object-cover" alt="Defender">
+                <div class="p-8">
+                    <h3 class="text-2xl mb-2 font-bold british-font">The Colonel</h3>
+                    <p class="text-xs uppercase tracking-widest text-gray-400 mb-4">Unit 02: Defender 110</p>
+                    <p class="text-sm text-gray-600 mb-6 font-light leading-relaxed">The flagship Defender converted into a full-scale cocktail station. High-volume service capable with 4 rapid draught taps.</p>
+                    <div class="flex justify-between items-center text-army-green font-bold border-t pt-6">
+                        <span class="stencil text-xl">£750+</span>
+                        <button onclick="navigateTo('mobilise')" class="text-[10px] uppercase font-bold bg-army-green text-white px-3 py-2">Book Unit</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Major -->
+            <div class="bg-white shadow-xl overflow-hidden border border-gray-100">
+                <img src="https://images.unsplash.com/photo-1629828834474-98c480068564?q=80&w=2071&auto=format&fit=crop" class="h-64 w-full object-cover" alt="Series 3">
+                <div class="p-8">
+                    <h3 class="text-2xl mb-2 font-bold british-font">The Major</h3>
+                    <p class="text-xs uppercase tracking-widest text-gray-400 mb-4">Unit 03: Series III</p>
+                    <p class="text-sm text-gray-600 mb-6 font-light leading-relaxed">Features a removable canvas top for 360-degree service. Perfectly suited for summer festivals and horse trials.</p>
+                    <div class="flex justify-between items-center text-army-green font-bold border-t pt-6">
+                        <span class="stencil text-xl">£550+</span>
+                        <button onclick="navigateTo('mobilise')" class="text-[10px] uppercase font-bold bg-army-green text-white px-3 py-2">Book Unit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Page: OUR STORY -->
+    <div id="story" class="page-content py-24 px-6">
+        <div class="max-w-4xl mx-auto">
+            <h2 class="text-5xl font-bold mb-8 text-center uppercase">From the Frontline to the Party</h2>
+            <div class="w-24 h-1 bg-army-green mx-auto mb-12"></div>
+            
+            <img src="https://images.unsplash.com/photo-1590424067954-448bc0661642?q=80&w=2070&auto=format&fit=crop" class="w-full h-96 object-cover shadow-2xl mb-12 border-[10px] border-white" alt="Workshop">
+            
+            <div class="space-y-6 text-gray-700 leading-relaxed text-lg font-light">
+                <p>Tapped Out Field Bars was born from a deep respect for the legendary Land Rover chassis. Founded in Solihull, the spiritual home of the brand, we believe that the most rugged engineering in British history deserves a celebratory second mission.</p>
+                <p>We source original Series and Defender models from all over the UK. Many of our units saw years of service on farms or in the military before arriving at our workshop. We strip them back to the chassis, treating every bolt and panel with care.</p>
+                <p>Our conversions are a blend of classic grit and refined hospitality. We use reclaimed mahogany for our bartops and custom-turned brass for our taps. Every mobilisation is a mission to make your event unforgettable.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Page: PACKAGES -->
+    <div id="packages" class="page-content py-24 px-6 bg-army-green text-white">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-5xl font-bold mb-4 text-center uppercase tracking-widest">Operation Details</h2>
+            <p class="text-center opacity-70 mb-16">Tailored service packages for every deployment.</p>
+
+            <div class="grid md:grid-cols-3 gap-12 text-center">
+                <!-- Package 1 -->
+                <div class="p-10 border border-white/10 hover:border-yellow-500 transition-all bg-black/10">
+                    <h3 class="text-xl uppercase tracking-widest mb-4 font-bold">The Scout</h3>
+                    <p class="text-3xl font-bold mb-8 text-yellow-500">£150/hr</p>
+                    <ul class="text-sm space-y-4 opacity-80 mb-10 font-light">
+                        <li>• Static Vehicle Deployment</li>
+                        <li>• Classic Glassware Provided</li>
+                        <li>• 1 Professional Field Barman</li>
+                        <li>• Custom Chalkboard Menu</li>
+                    </ul>
+                    <button onclick="navigateTo('mobilise')" class="w-full py-3 border border-white text-[10px] font-bold uppercase tracking-widest hover:bg-white hover:text-army-green transition-all">Select</button>
+                </div>
+
+                <!-- Package 2 -->
+                <div class="p-10 border-2 border-yellow-500 relative transform md:scale-105 bg-army-green shadow-2xl z-10">
+                    <span class="absolute -top-3 left-1/2 -translate-x-1/2 bg-yellow-500 text-army-green text-[9px] px-4 py-1 font-bold uppercase tracking-widest">Recommended</span>
+                    <h3 class="text-xl uppercase tracking-widest mb-4 font-bold">The Royal Salute</h3>
+                    <p class="text-3xl font-bold mb-8 text-yellow-500">£1,250</p>
+                    <ul class="text-sm space-y-4 opacity-90 mb-10 font-light">
+                        <li>• Full 8-Hour Deployment</li>
+                        <li>• Unlimited Draught Beer/Cider</li>
+                        <li>• 2 Professional Field Barmen</li>
+                        <li>• Bespoke Menu Branding</li>
+                    </ul>
+                    <button onclick="navigateTo('mobilise')" class="w-full py-4 bg-yellow-500 text-army-green text-[10px] font-bold uppercase tracking-widest hover:bg-white transition-all">Select</button>
+                </div>
+
+                <div class="p-10 border border-white/10 hover:border-yellow-500 transition-all bg-black/10">
+                    <h3 class="text-xl uppercase tracking-widest mb-4 font-bold">The Convoy</h3>
+                    <p class="text-3xl font-bold mb-8 text-yellow-500">Custom</p>
+                    <ul class="text-sm space-y-4 opacity-80 mb-10 font-light">
+                        <li>• Multi-Vehicle Fleet Ops</li>
+                        <li>• Full Weekend Deployment</li>
+                        <li>• Premium Spirit & Cocktail Bar</li>
+                        <li>• Generator Power Supply</li>
+                    </ul>
+                    <button onclick="navigateTo('mobilise')" class="w-full py-3 border border-white text-[10px] font-bold uppercase tracking-widest hover:bg-white hover:text-army-green transition-all">Enquire</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Page: MOBILISE -->
+    <div id="mobilise" class="page-content py-24 px-6 max-w-4xl mx-auto">
+        <div class="bg-white p-12 shadow-2xl border-t-8 border-army-green">
+            <h2 class="text-3xl mb-2 text-center font-bold british-font">Mobilisation Request</h2>
+            <p class="text-center text-[10px] text-gray-400 uppercase tracking-widest mb-10">Command & Control Center | Solihull HQ</p>
+            
+            <form id="mobilise-form" onsubmit="handleForm(event)" class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div>
+                    <label class="block text-[9px] uppercase font-bold text-gray-400 tracking-widest mb-2">Host Name / Rank</label>
+                    <input required type="text" class="w-full border-b-2 border-gray-100 p-3 focus:border-army-green outline-none bg-gray-50 text-sm" placeholder="e.g., Major Smith">
+                </div>
+                <div>
+                    <label class="block text-[9px] uppercase font-bold text-gray-400 tracking-widest mb-2">Email Address</label>
+                    <input required type="email" class="w-full border-b-2 border-gray-100 p-3 focus:border-army-green outline-none bg-gray-50 text-sm" placeholder="hq@tappedout.co.uk">
+                </div>
+                <div>
+                    <label class="block text-[9px] uppercase font-bold text-gray-400 tracking-widest mb-2">Target Date</label>
+                    <input required type="date" class="w-full border-b-2 border-gray-100 p-3 focus:border-army-green outline-none bg-gray-50 text-sm">
+                </div>
+                <div>
+                    <label class="block text-[9px] uppercase font-bold text-gray-400 tracking-widest mb-2">Unit Selection</label>
+                    <select class="w-full border-b-2 border-gray-100 p-3 focus:border-army-green outline-none bg-gray-50 text-sm">
+                        <option>The Brigadier (Series I)</option>
+                        <option>The Colonel (Defender 110)</option>
+                        <option>The Major (Series III)</option>
+                    </select>
+                </div>
+                <div class="md:col-span-2">
+                    <label class="block text-[9px] uppercase font-bold text-gray-400 tracking-widest mb-2">Operation Briefing</label>
+                    <textarea required rows="4" class="w-full border-2 border-gray-100 p-3 focus:border-army-green outline-none bg-gray-50 text-sm" placeholder="Event location, terrain type, and guest count..."></textarea>
+                </div>
+                <div class="md:col-span-2 pt-6">
+                    <button type="submit" class="w-full btn-mobilise text-sm">Request Mobilisation</button>
+                    <p class="text-center text-[8px] text-gray-400 mt-4 uppercase tracking-[0.2em]">Deployment confirmed within 24 hours</p>
+                </div>
+            </form>
+            <div id="form-success" class="hidden text-center p-8">
+                <h3 class="text-2xl font-bold mb-4 british-font">Message Received.</h3>
+                <p class="text-sm">HQ is processing your request. Stay alert for a dispatch.</p>
+                <button onclick="navigateTo('home')" class="mt-6 underline uppercase text-xs">Return to Base</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-950 text-white py-16 px-6 border-t border-white/5">
+        <div class="max-w-7xl mx-auto grid md:grid-cols-3 gap-12 items-center text-center">
+            <div class="leading-tight">
+                <div class="text-xl font-bold british-font tracking-[0.3em]">TAPPED OUT</div>
+                <div class="text-[9px] text-yellow-500 uppercase tracking-widest font-bold">Field Bars</div>
+            </div>
+            <div class="text-[10px] opacity-40 uppercase tracking-widest">
+                Solihull Roots. Countryside Soul. <br>
+                &copy; 2026 Tapped Out Bars Ltd.
+            </div>
+            <div class="flex justify-center space-x-6 text-[10px] font-bold uppercase tracking-widest">
+                <a href="#" class="nav-link">Instagram</a>
+                <span class="nav-link" onclick="navigateTo('story')">Fleet HQ</span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function navigateTo(pageId) {
+            window.scrollTo(0, 0);
+            document.querySelectorAll('.page-content').forEach(p => p.classList.remove('active'));
+            document.getElementById(pageId).classList.add('active');
+        }
+
+        function handleForm(e) {
+            e.preventDefault();
+            document.getElementById('mobilise-form').classList.add('hidden');
+            document.getElementById('form-success').classList.remove('hidden');
+        }
+
+        window.onload = () => navigateTo('home');
+    </script>
+</body>
+</html>
