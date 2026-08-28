@@ -263,26 +263,28 @@
             <h2 class="text-3xl mb-2 text-center font-bold british-font">Mobilisation Request</h2>
             <p class="text-center text-[10px] text-gray-400 uppercase tracking-widest mb-10">Command & Control Center | North Yorkshire HQ</p>
             
-            <form id="mobilise-form" onsubmit="handleForm(event)" class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <form id="mobilise-form" action="https://formsubmit.co/olivernappleyard@gmail.com" method="POST" onsubmit="handleForm(event)" class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <input type="hidden" name="_subject" value="New Mobilisation Request — Tapped Out Bars">
+                <input type="hidden" name="_captcha" value="false">
                 <div>
                     <label class="block text-[9px] uppercase font-bold text-gray-400 tracking-widest mb-2">Host Name / Rank</label>
-                    <input required type="text" class="w-full border-b-2 border-gray-100 p-3 focus:border-army-green outline-none bg-gray-50 text-sm" placeholder="e.g., Major Smith">
+                    <input name="Host Name" required type="text" class="w-full border-b-2 border-gray-100 p-3 focus:border-army-green outline-none bg-gray-50 text-sm" placeholder="e.g., Major Smith">
                 </div>
                 <div>
                     <label class="block text-[9px] uppercase font-bold text-gray-400 tracking-widest mb-2">Email Address</label>
-                    <input required type="email" class="w-full border-b-2 border-gray-100 p-3 focus:border-army-green outline-none bg-gray-50 text-sm" placeholder="hq@tappedout.co.uk">
+                    <input name="Email" required type="email" class="w-full border-b-2 border-gray-100 p-3 focus:border-army-green outline-none bg-gray-50 text-sm" placeholder="hq@tappedout.co.uk">
                 </div>
                 <div>
                     <label class="block text-[9px] uppercase font-bold text-gray-400 tracking-widest mb-2">Target Date</label>
-                    <input required type="date" class="w-full border-b-2 border-gray-100 p-3 focus:border-army-green outline-none bg-gray-50 text-sm">
+                    <input name="Target Date" required type="date" class="w-full border-b-2 border-gray-100 p-3 focus:border-army-green outline-none bg-gray-50 text-sm">
                 </div>
                 <div>
                     <label class="block text-[9px] uppercase font-bold text-gray-400 tracking-widest mb-2">Approx. Guest Count</label>
-                    <input type="number" min="1" class="w-full border-b-2 border-gray-100 p-3 focus:border-army-green outline-none bg-gray-50 text-sm" placeholder="e.g., 80">
+                    <input name="Guest Count" type="number" min="1" class="w-full border-b-2 border-gray-100 p-3 focus:border-army-green outline-none bg-gray-50 text-sm" placeholder="e.g., 80">
                 </div>
                 <div class="md:col-span-2">
                     <label class="block text-[9px] uppercase font-bold text-gray-400 tracking-widest mb-2">Operation Briefing</label>
-                    <textarea required rows="4" class="w-full border-2 border-gray-100 p-3 focus:border-army-green outline-none bg-gray-50 text-sm" placeholder="Event location, terrain type, and guest count..."></textarea>
+                    <textarea name="Briefing" required rows="4" class="w-full border-2 border-gray-100 p-3 focus:border-army-green outline-none bg-gray-50 text-sm" placeholder="Event location, terrain type, and guest count..."></textarea>
                 </div>
                 <div class="md:col-span-2 pt-6">
                     <button type="submit" class="w-full btn-mobilise text-sm">Request Mobilisation</button>
@@ -331,8 +333,18 @@
 
         function handleForm(e) {
             e.preventDefault();
-            document.getElementById('mobilise-form').classList.add('hidden');
-            document.getElementById('form-success').classList.remove('hidden');
+            const form = document.getElementById('mobilise-form');
+            const data = new FormData(form);
+            fetch(form.action, {
+                method: 'POST',
+                body: data,
+                headers: { 'Accept': 'application/json' }
+            }).then(() => {
+                form.classList.add('hidden');
+                document.getElementById('form-success').classList.remove('hidden');
+            }).catch(() => {
+                alert('Something went wrong sending your request — please try again or email us directly.');
+            });
         }
 
         window.onload = () => navigateTo('home');
