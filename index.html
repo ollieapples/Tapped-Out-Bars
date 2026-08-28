@@ -94,7 +94,24 @@
             <span class="nav-link" onclick="navigateTo('packages')">Packages</span>
             <span class="bg-white text-army-green px-5 py-2 hover:bg-yellow-500 transition-colors cursor-pointer" onclick="navigateTo('mobilise')">Mobilise</span>
         </div>
+        <button class="md:hidden" onclick="toggleMobileMenu()" aria-label="Open menu">
+            <svg id="menu-icon-open" width="26" height="20" viewBox="0 0 26 20" fill="none" stroke="white" stroke-width="2" stroke-linecap="butt">
+                <line x1="0" y1="1" x2="26" y2="1"/>
+                <line x1="0" y1="10" x2="26" y2="10"/>
+                <line x1="0" y1="19" x2="26" y2="19"/>
+            </svg>
+            <svg id="menu-icon-close" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" class="hidden">
+                <line x1="4" y1="4" x2="20" y2="20"/>
+                <line x1="20" y1="4" x2="4" y2="20"/>
+            </svg>
+        </button>
     </nav>
+    <div id="mobile-menu" class="hidden md:hidden flex-col bg-army-green text-white uppercase text-xs font-bold tracking-widest sticky top-[76px] z-40 shadow-lg">
+        <span class="nav-link px-6 py-4 border-t border-white/10" onclick="navigateTo('fleet'); toggleMobileMenu();">The Trailer</span>
+        <span class="nav-link px-6 py-4 border-t border-white/10" onclick="navigateTo('story'); toggleMobileMenu();">Our Story</span>
+        <span class="nav-link px-6 py-4 border-t border-white/10" onclick="navigateTo('packages'); toggleMobileMenu();">Packages</span>
+        <span class="px-6 py-4 border-t border-b border-white/10 bg-white text-army-green" onclick="navigateTo('mobilise'); toggleMobileMenu();">Mobilise</span>
+    </div>
 
     <!-- Page: HOME -->
     <div id="home" class="page-content active">
@@ -303,6 +320,13 @@
             window.scrollTo(0, 0);
             document.querySelectorAll('.page-content').forEach(p => p.classList.remove('active'));
             document.getElementById(pageId).classList.add('active');
+        }
+
+        function toggleMobileMenu() {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+            document.getElementById('mobile-menu').classList.toggle('flex');
+            document.getElementById('menu-icon-open').classList.toggle('hidden');
+            document.getElementById('menu-icon-close').classList.toggle('hidden');
         }
 
         function handleForm(e) {
